@@ -6,7 +6,7 @@ const strapi = require('./../backend');
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
+console.log('test')
 const server = createServer(async (req, res) => {
   const parsedUrl = parse(req.url, true);
   const { pathname, query } = parsedUrl;
