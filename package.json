@@ -6,7 +6,7 @@
     "start": "node app/start.js",
     "start-next": "next start",
     "start-strapi": "cd ./backend && npm run start",
-    "build": "next build"
+    "build": "next build && cd ./backend && npm run start"
   },
   "dependencies": {
     "eslint": "8.40.0",
