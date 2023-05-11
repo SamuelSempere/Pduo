@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node app/start.js",
+    "start-next": "next start",
+    "start-strapi": "cd ./backend && npm run start",
+    "build": "next build"
   },
   "dependencies": {
     "eslint": "8.40.0",
