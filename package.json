@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-      "dev": "concurrently \"next dev\" \"strapi develop\"",
-      "build": "next build",
-      "start": "next start",
-      "lint": "next lint"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "eslint": "8.40.0",
