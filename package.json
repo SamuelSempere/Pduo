@@ -11,14 +11,18 @@
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.3.30",
     "@googlemaps/js-api-loader": "^1.15.2",
+    "@reach/combobox": "^0.18.0",
+    "@react-google-maps/api": "^2.18.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "google-map-react": "^2.2.1",
     "google-maps-react": "^2.0.6",
     "next": "13.4.1",
+    "places-autocomplete-react": "^1.0.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-google-autocomplete": "^2.7.3",
-    "react-places-autocomplete": "^7.3.0"
+    "react-places-autocomplete": "^7.3.0",
+    "use-places-autocomplete": "^4.0.0"
   }
 }

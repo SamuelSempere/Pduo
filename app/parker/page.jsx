@@ -2,13 +2,15 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import styles from './../page.module.css'
+import AddressForm from './../components/placeAutcomplete'
+import AutoComplete from "places-autocomplete-react";
 
 const token = '6d12f40595883dbaef7e30f2272165df6ba49a7c9a9ad7f1abc3f23ed8980694274daa88d297532c340f8dc875ae5662ce6f51b2fb6103e01fe339e7d206787ec519cf80d76d843735d7fa0ce31f8b66e8998526853846526e96b2db61d4b6db4420f33998059bc2fa2bdfb505a0e6b61fd27fde5bb1bf130ff1fc0fb99e2c06';
 
 
 const Parker = () => {
-  const [vehiculo, setTipoVehiculo] = useState('');
-  const [tamano, setTamaño] = useState('');
+  const [vehiculo, setTipoVehiculo] = useState('Coche');
+  const [tamano, setTamaño] = useState('Pequeño (3.6 x 1,6m)');
   const [direccion, setDireccion] = useState('');
   const [latitud, setLatitud] = useState('');
   const [longitud, setLongitud] = useState('');
@@ -62,6 +64,7 @@ console.log(data)
       <button type="submit">Enviar</button>
     </form>
     </div>
+    <AddressForm/>
   </div>
   );
 };
