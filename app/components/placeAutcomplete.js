@@ -1,8 +1,8 @@
-const token = 'AIzaSyCziTRCAS24xZAsN9cjqhI4w_oUE8velIw'
-import { Londrina_Outline } from 'next/font/google';
+const token = process.env.API_PLACES;
 import React, { useState } from 'react';
-import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
-import { loadGoogleMapsScript } from 'use-places-autocomplete';
+import usePlacesAutocomplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
+//import useOnclickOutside from "react-cool-onclickoutside";
+
 
 const AddressForm = () => {
   const [address, setAddress] = useState('');
@@ -16,17 +16,21 @@ const AddressForm = () => {
     setValue,
     clearSuggestions,
   } = usePlacesAutocomplete({
-    debounce: 300,
+    requestOptions: {
+      componentRestrictions: {
+        country: 'es',
+      }
+    },
+    debounce: 500,
     googleMapsApiKey: token,
     scriptOptions: {
       onload: () => handleScriptLoad(),
     },
-  });
+  });    
+
 
   const handleScriptLoad = () => {
-    loadGoogleMapsScript(() => {
       setShowMap(true);
-    });
   };
 
   const handleInput = (e) => {
@@ -62,7 +66,7 @@ const AddressForm = () => {
       <input
         value={value}
         onChange={handleInput}
-        placeholder="Enter an address"
+        placeholder="Búsca tu dirección aquí:"
       />
       {status === 'OK' && (
         <ul>
@@ -73,9 +77,9 @@ const AddressForm = () => {
           ))}
         </ul>
       )}
-      <p>Address: {address}</p>
+      <p>Dirección: {address}</p>
       {showMap && (
-        <div id="map" style={{ height: '400px', marginTop: '20px' }}></div>
+        <div id="map" style={{ height: '400px', marginTop: '20px' }}>mapa</div>
       )}
     </div>
   );

@@ -1,17 +1,20 @@
-
 'use client';
+const token = process.env.API_PLACES;
+const tokenStrapi = process.env.API_MAPS;
+
+
 import React, { useEffect, useState } from "react";
 import styles from './../page.module.css'
-import AddressForm from './../components/placeAutcomplete'
-import AutoComplete from "places-autocomplete-react";
+import usePlacesAutocomplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
+import Map from './../components/map';
 
-const token = '6d12f40595883dbaef7e30f2272165df6ba49a7c9a9ad7f1abc3f23ed8980694274daa88d297532c340f8dc875ae5662ce6f51b2fb6103e01fe339e7d206787ec519cf80d76d843735d7fa0ce31f8b66e8998526853846526e96b2db61d4b6db4420f33998059bc2fa2bdfb505a0e6b61fd27fde5bb1bf130ff1fc0fb99e2c06';
 
 
 const Parker = () => {
+  const [address, setAddress] = useState('');
+  const [showMap, setShowMap] = useState(false);
   const [vehiculo, setTipoVehiculo] = useState('Coche');
   const [tamano, setTamaño] = useState('Pequeño (3.6 x 1,6m)');
-  const [direccion, setDireccion] = useState('');
   const [latitud, setLatitud] = useState('');
   const [longitud, setLongitud] = useState('');
 
@@ -21,7 +24,9 @@ const Parker = () => {
     const data = {
       vehiculo,
       tamano,
-      direccion
+      address,
+      latitud,
+      longitud
     };
 console.log(data)
     try {
@@ -29,7 +34,7 @@ console.log(data)
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${tokenStrapi}`
         },
         body: JSON.stringify({data})
       });
@@ -40,6 +45,55 @@ console.log(data)
       console.error(error);
     }
   };
+
+  const {
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      componentRestrictions: {
+        country: 'es',
+      }
+    },
+    debounce: 500,
+    googleMapsApiKey: token,
+    scriptOptions: {
+      onload: () => handleScriptLoad(),
+    },
+  });    
+
+
+  const handleScriptLoad = () => {
+      setShowMap(true);
+  };
+
+  const handleInput = (e) => {
+    setShowMap(false);
+    setValue(e.target.value);
+    setAddress(e.target.value);
+  };
+
+  const handleSelect = (address) => {
+    setValue(address, false);
+    setAddress(address);
+    setShowMap(true)
+    clearSuggestions();
+
+    getGeocode({ address })
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng })=>{
+        setLatitud(lat),
+        setLongitud(lng)
+      }
+      )
+      .catch((error) => {
+        console.log('Error retrieving geolocation:', error);
+      });
+  };
+
+
 
   return (
 <div className={styles.container}>
@@ -61,10 +115,30 @@ console.log(data)
           <option value="Grande (5 x 1,9m)">GGrande (5 x 1,9m)</option>
         </select>
       </div>
+          <div>
+              <input
+                value={value}
+                onChange={handleInput}
+                placeholder="Búsca tu dirección aquí:"
+              />
+              {status === 'OK' && (
+                <ul>
+                  {data.map(({ place_id, description }) => (
+                    <li key={place_id} onClick={() => handleSelect(description)}>
+                      {description}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p>Dirección: {address}</p>
+              {showMap && (
+                <Map address={address} />
+              )}
+            </div>
       <button type="submit">Enviar</button>
     </form>
     </div>
-    <AddressForm/>
+
   </div>
   );
 };
