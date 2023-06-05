@@ -1,4 +1,5 @@
-const token = process.env.API_PLACES;
+const token = process.env.NEXT_PUBLIC_API_PLACES;
+
 import React, { useState } from 'react';
 import usePlacesAutocomplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 //import useOnclickOutside from "react-cool-onclickoutside";

@@ -1,9 +1,8 @@
 'use client';
-const token = process.env.API_PLACES;
-const tokenStrapi = process.env.API_MAPS;
+const tokenStrapi = process.env.NEXT_PUBLIC_API_STRAPI;
+const token = process.env.NEXT_PUBLIC_API_PLACES;
 
-
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from './../page.module.css'
 import usePlacesAutocomplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 import Map from './../components/map';
@@ -14,7 +13,7 @@ const Parker = () => {
   const [address, setAddress] = useState('');
   const [showMap, setShowMap] = useState(false);
   const [vehiculo, setTipoVehiculo] = useState('Coche');
-  const [tamano, setTamaño] = useState('Pequeño (3.6 x 1,6m)');
+  const [tamano, setTamaño] = useState('Pequeño (3,6 x 1,6m)');
   const [latitud, setLatitud] = useState('');
   const [longitud, setLongitud] = useState('');
 
@@ -24,7 +23,7 @@ const Parker = () => {
     const data = {
       vehiculo,
       tamano,
-      address,
+      direccion: address,
       latitud,
       longitud
     };
@@ -110,8 +109,8 @@ console.log(data)
       <div>
         <label>Tamaño:</label>
         <select value={tamano} onChange={(e) => setTamaño(e.target.value)}>
-          <option value="Pequeño (3.6 x 1,6m)">Pequeño (3.6 x 1,6m)</option>
-          <option value="Mediano (4,5 X 1,8m)">Mediano (4,5 X 1,8m)</option>
+          <option value="Pequeño (3,6 x 1,6m)">Pequeño (3.6 x 1,6m)</option>
+          <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 X 1,8m)</option>
           <option value="Grande (5 x 1,9m)">GGrande (5 x 1,9m)</option>
         </select>
       </div>
