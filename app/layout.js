@@ -1,9 +1,13 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
-import Script from 'next/script'
+import Link from 'next/link'
 
-
-const inter = Inter({ subsets: ['latin'] })
+const links = [{
+  label: 'Parker',
+  route: '/parker'
+},{
+label: 'Driver',
+route: '/driver'
+}]
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,10 +16,22 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
     <head><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCziTRCAS24xZAsN9cjqhI4w_oUE8velIw&libraries=places&callback=Function.prototype" async></script>
     </head>
-      <body className={inter.className}>{children}</body>
+      <body>
+      <header>
+          <nav>
+           <ul>
+          {links.map(({label,route}) => (
+          <li key={route}>
+            <Link href={route}>{label}</Link>
+         </li>
+          ))}
+         </ul>
+    </nav>
+</header>
+      {children}</body>
     </html>
   )
 }
