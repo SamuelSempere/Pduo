@@ -97,7 +97,6 @@ console.log(data)
 
   return (
 <div className={styles.container}>
-<div>
     <form onSubmit={handleSubmit}>
       <div>
         <label>Tipo de vehículo:</label>
@@ -139,8 +138,6 @@ console.log(data)
       <button type="submit">Enviar</button>
     </form>
     </div>
-
-  </div>
   );
 };
 

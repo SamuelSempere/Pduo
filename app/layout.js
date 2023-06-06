@@ -7,21 +7,21 @@ const links = [
   {
     label: 'Inicio',
     route: '/'
-  },{
-  label: 'Parker',
-  route: '/parker'
-}, {
-  label: 'Driver',
-  route: '/driver'
-},
-{
-  label: 'FAQ',
-  route: '/faq'
-},
-{
-  label: 'Conacto',
-  route: '/contacto'
-},
+  }, {
+    label: 'Parker',
+    route: '/parker'
+  }, {
+    label: 'Driver',
+    route: '/driver'
+  },
+  {
+    label: 'FAQ',
+    route: '/faq'
+  },
+  {
+    label: 'Conacto',
+    route: '/contacto'
+  },
 ]
 
 var styles = {
@@ -50,15 +50,15 @@ var styles = {
     height: '100%'
   },
   bmMenu: {
-    background: '#373a47',
+    background: '#b4c4bb',
     padding: '2.5em 1.5em 0',
-    fontSize: '1.15em'
+    fontSize: '2.15em'
   },
   bmMorphShape: {
     fill: '#373a47'
   },
   bmItemList: {
-    color: '#b8b7ad',
+    color: '#fff',
     padding: '0.8em'
   },
   bmItem: {
@@ -77,20 +77,16 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <header>
-          <Menu styles={ styles } right pageWrapId={"page-wrap"}>
+          <Menu styles={styles} itemListElement="div" left pageWrapId={"page-wrap"}>
             <nav>
-              <ul>
-                {links.map(({ label, route }) => (
-                  <li key={route}>
-                    <Link href={route}>{label}</Link>
-                  </li>
-                ))}
-              </ul>
+              {links.map(({ label, route }) => (
+                <div><Link key={route} href={route}>{label}</Link></div>
+              ))}
             </nav>
           </Menu>
         </header>
-        <div class="page-wrap" id="page-wrap"> 
-           {children}
+        <div class="page-wrap" id="page-wrap">
+          {children}
         </div>
       </body>
     </html>
