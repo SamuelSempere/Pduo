@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import styles from './../page.module.css'
 import usePlacesAutocomplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 import Map from './../components/map';
+import Image from 'next/image'
 
 
 
@@ -109,9 +110,9 @@ console.log(data)
       <div>
         <label>Tamaño:</label>
         <select value={tamano} onChange={(e) => setTamaño(e.target.value)}>
-          <option value="Pequeño (3,6 x 1,6m)">Pequeño (3.6 x 1,6m)</option>
-          <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 X 1,8m)</option>
-          <option value="Grande (5 x 1,9m)">GGrande (5 x 1,9m)</option>
+          <option value="Pequeño (3,6 x 1,6m)">Pequeño (3,6 x 1,6m)</option>
+          <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 x 1,8m)</option>
+          <option value="Grande (5 x 1,9m)">Grande (5 x 1,9m)</option>
         </select>
       </div>
           <div>
@@ -124,16 +125,17 @@ console.log(data)
                 <ul>
                   {data.map(({ place_id, description }) => (
                     <li key={place_id} onClick={() => handleSelect(description)}>
-                      {description}
+                      <Image width={20} height={28} src='/parking-ico.png'/>{description}
                     </li>
                   ))}
                 </ul>
               )}
-              <p>Dirección: {address}</p>
+              <br/>
               {showMap && (
-                <Map address={address} />
+                 <Map address={address} />
               )}
             </div>
+            <br/>
       <button type="submit">Enviar</button>
     </form>
     </div>

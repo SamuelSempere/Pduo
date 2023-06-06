@@ -3,13 +3,26 @@ import './globals.css'
 
 import Link from 'next/link'
 import { slide as Menu } from 'react-burger-menu'
-const links = [{
+const links = [
+  {
+    label: 'Inicio',
+    route: '/'
+  },{
   label: 'Parker',
   route: '/parker'
 }, {
   label: 'Driver',
   route: '/driver'
-}]
+},
+{
+  label: 'FAQ',
+  route: '/faq'
+},
+{
+  label: 'Conacto',
+  route: '/contacto'
+},
+]
 
 var styles = {
   bmBurgerButton: {
