@@ -5,7 +5,7 @@ import styles from './page.module.css'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { slide as Menu } from 'react-burger-menu'
+import { slide as Menu, handleOnClose } from 'react-burger-menu'
 const links = [
   {
     label: 'Inicio',
@@ -50,7 +50,8 @@ var styles_menu = {
   },
   bmMenuWrap: {
     position: 'fixed',
-    height: '100%'
+    height: '100%',
+    top: '93px'
   },
   bmMenu: {
     background: '#b4c4bb',
@@ -68,7 +69,8 @@ var styles_menu = {
     display: 'inline-block'
   },
   bmOverlay: {
-    background: 'rgba(0, 0, 0, 0.3)'
+    background: 'rgba(0, 0, 0, 0.3)',
+    top: '93px'
   }
 }
 
@@ -80,16 +82,21 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <header className={styles.header}>
-        <Image width={300} padding={20} height={90} src='/logo-parkiduo.png'></Image>
+        <div className={styles.logo}>
+        <Image src='/logo-parkiduo.png'
+        fill={true}
+        alt='logo'>
+        </Image>
+        </div>
           <Menu styles={styles_menu} itemListElement="div" right pageWrapId={"page-wrap"}>
             <nav>
               {links.map(({ label, route }) => (
-                <div key={route}><Link href={route}>{label}</Link></div>
+                <div key={route}><Link href={route} onClick={(e) => handleOnClose }>{label}</Link></div>
               ))}
             </nav>
           </Menu>
         </header>
-        <div class="page-wrap" id="page-wrap">
+        <div className="page-wrap" id="page-wrap">
           {children}
         </div>
       </body>
