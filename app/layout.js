@@ -1,6 +1,9 @@
 'use client'
 import './globals.css'
+import styles from './page.module.css'
 
+
+import Image from 'next/image'
 import Link from 'next/link'
 import { slide as Menu } from 'react-burger-menu'
 const links = [
@@ -24,12 +27,12 @@ const links = [
   },
 ]
 
-var styles = {
+var styles_menu = {
   bmBurgerButton: {
     position: 'fixed',
     width: '36px',
     height: '30px',
-    left: '36px',
+    right: '36px',
     top: '36px'
   },
   bmBurgerBars: {
@@ -76,8 +79,9 @@ export default function RootLayout({ children }) {
       <head><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCziTRCAS24xZAsN9cjqhI4w_oUE8velIw&libraries=places&callback=Function.prototype" defer></script>
       </head>
       <body>
-        <header>
-          <Menu styles={styles} itemListElement="div" left pageWrapId={"page-wrap"}>
+        <header className={styles.header}>
+        <Image width={300} padding={20} height={90} src='/logo-parkiduo.png'></Image>
+          <Menu styles={styles_menu} itemListElement="div" right pageWrapId={"page-wrap"}>
             <nav>
               {links.map(({ label, route }) => (
                 <div><Link key={route} href={route}>{label}</Link></div>

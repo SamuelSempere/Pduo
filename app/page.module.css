@@ -12,6 +12,11 @@
 #page-wrap{
   margin-top: 25%;
 }
+.header {
+  height: 94px;
+  background-color: #eeeded;
+}
+
 .suggestions {
   list-style-type: none;
   background: #fff;
