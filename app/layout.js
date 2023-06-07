@@ -84,7 +84,7 @@ export default function RootLayout({ children }) {
           <Menu styles={styles_menu} itemListElement="div" right pageWrapId={"page-wrap"}>
             <nav>
               {links.map(({ label, route }) => (
-                <div><Link key={route} href={route}>{label}</Link></div>
+                <div key={route}><Link href={route}>{label}</Link></div>
               ))}
             </nav>
           </Menu>
