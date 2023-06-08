@@ -121,11 +121,11 @@ console.log(data)
                 placeholder="Búsca tu dirección aquí:"
               />
               {status === 'OK' && (
-                <ul>
+                <ul className={styles.suggestions_list}>
                   {data.map(({ place_id, description }) => (
-                    <li key={place_id} onClick={() => handleSelect(description)}>
-                      <Image width={20} height={28} src='/parking-ico.png'/>{description}
-                    </li>
+                    <div className={styles.suggestions} key={place_id} onClick={() => handleSelect(description)}>
+                      <Image className={styles.park_image}width={15} height={21} src='/parking-ico.png'/>{description}
+                    </div>
                   ))}
                 </ul>
               )}
