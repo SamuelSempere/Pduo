@@ -22,6 +22,10 @@ const links = [
     route: '/faq'
   },
   {
+    label: 'Mi cuenta',
+    route: '/myaccount'
+  },
+  {
     label: 'Conacto',
     route: '/contacto'
   },

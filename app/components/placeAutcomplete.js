@@ -70,15 +70,14 @@ const AddressForm = () => {
         placeholder="Búsca tu dirección aquí:"
       />
       {status === 'OK' && (
-        <ul>
+        <div>
           {data.map(({ place_id, description }) => (
-            <li key={place_id} onClick={() => handleSelect(description)}>
+            <div key={place_id} onClick={() => handleSelect(description)}>
               {description}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
-      <p>Dirección: {address}</p>
       {showMap && (
         <div id="map" style={{ height: '400px', marginTop: '20px' }}>mapa</div>
       )}

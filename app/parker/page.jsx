@@ -5,7 +5,7 @@ const token = process.env.NEXT_PUBLIC_API_PLACES;
 import React, { useState } from "react";
 import styles from './../page.module.css'
 import usePlacesAutocomplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
-import Map from './../components/map';
+import Map from '../components/map';
 import Image from 'next/image'
 
 
