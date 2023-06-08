@@ -4,7 +4,7 @@ const token = process.env.NEXT_PUBLIC_API_PLACES;
 
 import React, { useState } from "react";
 import styles from './../page.module.css'
-import usePlacesAutocomplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import Map from '../components/map';
 import Image from 'next/image'
 
@@ -28,7 +28,7 @@ const Parker = () => {
       latitud,
       longitud
     };
-console.log(data)
+    console.log(data)
     try {
       const response = await fetch('http://127.0.0.1:1337/api/garages', {
         method: 'POST',
@@ -36,7 +36,7 @@ console.log(data)
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${tokenStrapi}`
         },
-        body: JSON.stringify({data})
+        body: JSON.stringify({ data })
       });
 
       const responseData = await response.json();
@@ -62,11 +62,11 @@ console.log(data)
     scriptOptions: {
       onload: () => handleScriptLoad(),
     },
-  });    
+  });
 
 
   const handleScriptLoad = () => {
-      setShowMap(true);
+    setShowMap(true);
   };
 
   const handleInput = (e) => {
@@ -83,9 +83,9 @@ console.log(data)
 
     getGeocode({ address })
       .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng })=>{
+      .then(({ lat, lng }) => {
         setLatitud(lat),
-        setLongitud(lng)
+          setLongitud(lng)
       }
       )
       .catch((error) => {
@@ -96,25 +96,32 @@ console.log(data)
 
 
   return (
-<div className={styles.container}>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Tipo de vehículo:</label>
-        <select value={vehiculo} onChange={(e) => setTipoVehiculo(e.target.value)}>
-          <option value="Coche">Coche</option>
-          <option value="Moto">Moto</option>
-        </select>
-      </div>
+    <div className={styles.container}>
+      <div className={styles.container_columns}>
+        <div className={styles.container_columns_left}>
+          <h1>!Hola Parker!</h1>
+          <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p>
+          <p>Tú decides con quien contactar. Sin costes ni compromiso. 🙂</p>
+        </div>
+        <div className={styles.container_columns_right}>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Tipo de vehículo:</label>
+              <select value={vehiculo} onChange={(e) => setTipoVehiculo(e.target.value)}>
+                <option value="Coche">Coche</option>
+                <option value="Moto">Moto</option>
+              </select>
+            </div>
 
-      <div>
-        <label>Tamaño:</label>
-        <select value={tamano} onChange={(e) => setTamaño(e.target.value)}>
-          <option value="Pequeño (3,6 x 1,6m)">Pequeño (3,6 x 1,6m)</option>
-          <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 x 1,8m)</option>
-          <option value="Grande (5 x 1,9m)">Grande (5 x 1,9m)</option>
-        </select>
-      </div>
-          <div>
+            <div>
+              <label>Tamaño:</label>
+              <select value={tamano} onChange={(e) => setTamaño(e.target.value)}>
+                <option value="Pequeño (3,6 x 1,6m)">Pequeño (3,6 x 1,6m)</option>
+                <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 x 1,8m)</option>
+                <option value="Grande (5 x 1,9m)">Grande (5 x 1,9m)</option>
+              </select>
+            </div>
+            <div>
               <input
                 value={value}
                 onChange={handleInput}
@@ -124,19 +131,21 @@ console.log(data)
                 <ul className={styles.suggestions_list}>
                   {data.map(({ place_id, description }) => (
                     <div className={styles.suggestions} key={place_id} onClick={() => handleSelect(description)}>
-                      <Image className={styles.park_image}width={15} height={21} src='/parking-ico.png'/>{description}
+                      <Image className={styles.park_image} width={15} height={21} src='/parking-ico.png' />{description}
                     </div>
                   ))}
                 </ul>
               )}
-              <br/>
+              <br />
               {showMap && (
-                 <Map address={address} />
+                <Map address={address} />
               )}
             </div>
-            <br/>
-      <button type="submit">Enviar</button>
-    </form>
+            <br />
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

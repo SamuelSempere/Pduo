@@ -14,13 +14,29 @@
 }
 .header {
   height: 94px;
-  background-color: #eeeded;
+  background-color: #efebeb;
 }
 .logo {
   position: relative;
   width: 300px;
   height: 84px;
   top:7px;
+}
+.container_columns
+{
+  display: flex;
+  flex-direction: row;
+  padding: 100px 0;
+  gap: 35px;
+}
+.container_columns_left{
+ width: 20%
+}
+.container_columns_right{
+    color: black;
+    width: 75%;
+    background-color: #efebeb;
+    padding: 70px 30px 0 30px;
 }
 
 
