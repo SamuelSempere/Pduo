@@ -62,8 +62,8 @@ var styles_menu = {
   },
   bmMenu: {
     background: '#b4c4bb',
-    padding: '2.5em 1.5em 0',
-    fontSize: '2.15em'
+    padding: '1.5em 0.5em 0',
+    fontSize: '2.3em'
   },
   bmMorphShape: {
     fill: '#373a47'
@@ -74,6 +74,9 @@ var styles_menu = {
   },
   bmItem: {
     display: 'inline-block'
+  },
+  bmItem_div: {
+    padding: '10px 0px'
   },
   bmOverlay: {
     background: 'rgba(0, 0, 0, 0.3)',
@@ -114,7 +117,7 @@ export default function RootLayout({ children }) {
           styles={styles_menu} itemListElement="div" right pageWrapId={"page-wrap"}>
             <nav>
               {links.map(({ label, route }) => (
-                <div key={route}><Link onClick={closeSideBar} href={route}>{label}</Link></div>
+                <div className={styles.bmItem_div} key={route}><Link onClick={closeSideBar} href={route}>{label}</Link></div>
               ))}
             </nav>
           </Menu>

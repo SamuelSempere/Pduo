@@ -51,6 +51,10 @@
   margin-right:6px;
 }
 
+.bmItem_div {
+  padding: 10px 0px
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
