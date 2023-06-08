@@ -26,7 +26,7 @@
 {
   display: flex;
   flex-direction: row;
-  padding: 100px 0;
+  padding: 10% 10%;
   gap: 35px;
 }
 .container_columns_left{
@@ -175,5 +175,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
   {
     display: flex;
     flex-direction: column;
+  }
+  .container_columns_left
+  {
+   width:100%
+  }
+  .container_columns_right
+  {
+   width:100%
   }
 }
