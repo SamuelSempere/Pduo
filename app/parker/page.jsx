@@ -118,7 +118,7 @@ console.log(data)
               <input
                 value={value}
                 onChange={handleInput}
-                placeholder="Búsca tu dirección aquí:"
+                placeholder="Calle, número, CP, población"
               />
               {status === 'OK' && (
                 <ul className={styles.suggestions_list}>

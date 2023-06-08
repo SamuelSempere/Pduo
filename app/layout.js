@@ -1,11 +1,14 @@
 'use client'
 import './globals.css'
+import React, { useState } from "react";
 import styles from './page.module.css'
-
-
 import Image from 'next/image'
 import Link from 'next/link'
-import { slide as Menu, handleOnClose } from 'react-burger-menu'
+import { slide as Menu } from 'react-burger-menu'
+
+
+
+
 const links = [
   {
     label: 'Inicio',
@@ -80,6 +83,18 @@ var styles_menu = {
 
 
 export default function RootLayout({ children }) {
+
+  const [isOpen, setOpen] = useState(false)
+
+  const handleIsOpen = () => {
+    setOpen(!isOpen)
+  }
+  
+  const closeSideBar = () => {
+    setOpen(false)
+  }
+
+
   return (
     <html lang="es">
       <head><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCziTRCAS24xZAsN9cjqhI4w_oUE8velIw&libraries=places&callback=Function.prototype" defer></script>
@@ -92,10 +107,14 @@ export default function RootLayout({ children }) {
         alt='logo'>
         </Image>
         </div>
-          <Menu styles={styles_menu} itemListElement="div" right pageWrapId={"page-wrap"}>
+          <Menu 
+          isOpen={isOpen}
+          onOpen={handleIsOpen}
+          onClose={handleIsOpen}
+          styles={styles_menu} itemListElement="div" right pageWrapId={"page-wrap"}>
             <nav>
               {links.map(({ label, route }) => (
-                <div key={route}><Link href={route} onClick={(e) => handleOnClose }>{label}</Link></div>
+                <div key={route}><Link onClick={closeSideBar} href={route}>{label}</Link></div>
               ))}
             </nav>
           </Menu>
