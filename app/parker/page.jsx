@@ -99,11 +99,28 @@ const Parker = () => {
     <div className={styles.container}>
       <div className={styles.container_columns}>
         <div className={styles.container_columns_left}>
-          <h1>!Hola Parker!</h1>
+          <h1>¡Hola Parker!</h1>
           <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p>
           <p>Tú decides con quien contactar. Sin costes ni compromiso. 🙂</p>
         </div>
         <div className={styles.container_columns_right}>
+        <h2 className={styles.title_h2}>¿Dónde se ubica tu plaza?</h2>
+        <p>Indica el nº para ser más precisos en la búqueda</p>
+        <input
+        value={value}
+        onChange={handleInput}
+        placeholder="Calle, número, CP, población"
+        className={styles.formulario}
+      />
+      {status === 'OK' && (
+        <ul className={styles.suggestions_list}>
+          {data.map(({ place_id, description }) => (
+            <div className={styles.suggestions} key={place_id} onClick={() => handleSelect(description)}>
+              <Image className={styles.park_image} width={15} height={21} src='/parking-ico.png' />{description}
+            </div>
+          ))}
+        </ul>
+      )}
           <form onSubmit={handleSubmit}>
             <div>
               <label>Tipo de vehículo:</label>
@@ -122,20 +139,7 @@ const Parker = () => {
               </select>
             </div>
             <div>
-              <input
-                value={value}
-                onChange={handleInput}
-                placeholder="Calle, número, CP, población"
-              />
-              {status === 'OK' && (
-                <ul className={styles.suggestions_list}>
-                  {data.map(({ place_id, description }) => (
-                    <div className={styles.suggestions} key={place_id} onClick={() => handleSelect(description)}>
-                      <Image className={styles.park_image} width={15} height={21} src='/parking-ico.png' />{description}
-                    </div>
-                  ))}
-                </ul>
-              )}
+             
               <br />
               {showMap && (
                 <Map address={address} />
