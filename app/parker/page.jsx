@@ -13,7 +13,6 @@ import Image from 'next/image'
 const Parker = () => {
   const [address, setAddress] = useState('');
   const [showMap, setShowMap] = useState(false);
-  const [vehiculo, setTipoVehiculo] = useState('Coche');
   const [tamano, setTamaño] = useState('Pequeño (3,6 x 1,6m)');
   const [latitud, setLatitud] = useState('');
   const [longitud, setLongitud] = useState('');
@@ -103,53 +102,65 @@ const Parker = () => {
           <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p>
           <p>Tú decides con quien contactar. Sin costes ni compromiso. 🙂</p>
         </div>
-        <div className={styles.container_columns_right}>
-        <h2 className={styles.title_h2}>¿Dónde se ubica tu plaza?</h2>
-        <p>Indica el nº para ser más precisos en la búqueda</p>
-        <input
-        value={value}
-        onChange={handleInput}
-        placeholder="Calle, número, CP, población"
-        className={styles.formulario}
-      />
-      {status === 'OK' && (
-        <ul className={styles.suggestions_list}>
-          {data.map(({ place_id, description }) => (
-            <div className={styles.suggestions} key={place_id} onClick={() => handleSelect(description)}>
-              <Image className={styles.park_image} width={15} height={21} src='/parking-ico.png' />{description}
-            </div>
-          ))}
-        </ul>
-      )}
+        <div className={styles.container_columns_right_parent}>
           <form onSubmit={handleSubmit}>
-            <div>
-              <label>Tipo de vehículo:</label>
-              <select value={vehiculo} onChange={(e) => setTipoVehiculo(e.target.value)}>
-                <option value="Coche">Coche</option>
-                <option value="Moto">Moto</option>
-              </select>
-            </div>
+            <div className={styles.container_columns_right}>
+              <h2 className={styles.title_h2}>¿Dónde se ubica tu plaza?</h2>
+              <p>Indica el nº para ser más precisos en la búqueda</p>
+              <input
+                value={value}
+                onChange={handleInput}
+                placeholder="Calle, número, CP, población"
+                className={styles.formulario}
+              />
+              {status === 'OK' && (
+                <ul className={styles.suggestions_list}>
+                  {data.map(({ place_id, description }) => (
+                    <div className={styles.suggestions} key={place_id} onClick={() => handleSelect(description)}>
+                      <Image className={styles.park_image} width={15} height={21} src='/parking-ico.png' />{description}
+                    </div>
+                  ))}
+                </ul>
+              )}
+              <div>
 
-            <div>
+                <br />
+                {showMap && (
+                  <Map address={address} />
+                )}
+              </div>
+            </div>
+            <div className={styles.container_columns_right}>
+              <h2 className={styles.title_h2}>¿En qué horario la ofreces?</h2>
+            </div>
+            <div className={styles.container_columns_right}>
+              <h2 className={styles.title_h2}>¿Durante qué periodo de alquiler?</h2>
+            </div>
+            <div className={styles.container_columns_right}>
+              <h2 className={styles.title_h2}>¿Para qué vehiculo es adecuada?</h2>
               <label>Tamaño:</label>
               <select value={tamano} onChange={(e) => setTamaño(e.target.value)}>
+                <option value="Pequeño (3,6 x 1,6m)">Moto</option>
                 <option value="Pequeño (3,6 x 1,6m)">Pequeño (3,6 x 1,6m)</option>
                 <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 x 1,8m)</option>
                 <option value="Grande (5 x 1,9m)">Grande (5 x 1,9m)</option>
               </select>
             </div>
-            <div>
-             
-              <br />
-              {showMap && (
-                <Map address={address} />
-              )}
+            <div className={styles.container_columns_right}>
+              <h2 className={styles.title_h2}>¿En qué planta se situa?</h2>
             </div>
-            <br />
+            <div className={styles.container_columns_right}>
+              <h2 className={styles.title_h2}>¿Tienes plaza en propiedad o es alquilada?</h2>
+            </div>
+            <div className={styles.container_columns_right}>
+              <h2 className={styles.title_h2}>¿Por cuando la alquilas al mes?</h2>
+            </div>
+            <div>
             <button type="submit">Enviar</button>
-          </form>
+            </div>
+            </form>
         </div>
-      </div>
+    </div>
     </div>
   );
 };

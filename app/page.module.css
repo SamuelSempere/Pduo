@@ -32,17 +32,21 @@
 {
   display: flex;
   flex-direction: row;
-  padding: 10% 10%;
-  gap: 35px;
+  padding: 10% 3%;
+  gap: 45px;
 }
 .container_columns_left{
  width: 20%
 }
-.container_columns_right{
+.container_columns_right_parent{
     color: black;
     width: 75%;
-    background-color: #efebeb;
-    padding: 10px 30px 0 30px;
+    
+}
+.container_columns_right{
+  background-color: #efebeb;
+  padding: 10px 30px 10px 30px;
+  margin-bottom: 26px;
 }
 .formulario{
   width: 100%;
