@@ -132,6 +132,19 @@ const Parker = () => {
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿En qué horario la ofreces?</h2>
+              <div className={styles.formulario_horario}>
+                  <input className={styles.formulario_checkbox} type="checkbox"/> Entre semana
+                  <input className={styles.formulario_date} type="time" step="3600000" /> a 
+                  <input className={styles.formulario_date} type="time" step="3600000" />
+                  <input className={styles.formulario_checkbox} type="checkbox"/> 24 Horas     
+              </div>
+              <div className={styles.formulario_horario}>
+              <input className={styles.formulario_checkbox} type="checkbox"/> Fin de semana
+              <input className={styles.formulario_date} type="time" step="3600000" /> a 
+              <input className={styles.formulario_date} type="time" step="3600000" />
+              <input className={styles.formulario_checkbox} type="checkbox"/> 24 Horas     
+          </div>
+              <div></div>
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Durante qué periodo de alquiler?</h2>

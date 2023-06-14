@@ -48,9 +48,34 @@
   padding: 10px 30px 10px 30px;
   margin-bottom: 26px;
 }
+.formulario_horario{
+  display: flex;
+    align-items: center;
+}
+
 .formulario{
   width: 100%;
   height: 40px;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border: 2px solid #d1d1d1;
+  transition: all .3s;
+  line-height: 1.5;
+  font-size: 1.1em
+}
+.formulario_checkbox{
+  width:25px;
+  height: 25px;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border: 2px solid #d1d1d1;
+  transition: all .3s;
+  line-height: 1.5;
+  font-size: 1.1em;
+  margin-right: 15px;
+}
+.formulario_date{
+  width: 110px;
   border-radius: 3px;
   padding: 0.5rem 1rem;
   border: 2px solid #d1d1d1;
