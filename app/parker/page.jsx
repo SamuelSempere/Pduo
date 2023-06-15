@@ -14,6 +14,9 @@ const Parker = () => {
   const [address, setAddress] = useState('');
   const [showMap, setShowMap] = useState(false);
   const [tamano, setTamaño] = useState('Pequeño (3,6 x 1,6m)');
+  const [periodo, setPeriodo] = useState('Indefinido');
+  const [planta, setPlanta] = useState('Planta baja');  
+  const [propiedad, setPropiedad] = useState('Propiedad');
   const [latitud, setLatitud] = useState('');
   const [longitud, setLongitud] = useState('');
 
@@ -98,8 +101,8 @@ const Parker = () => {
     <div className={styles.container}>
       <div className={styles.container_columns}>
         <div className={styles.container_columns_left}>
-          <h1>¡Hola Parker!</h1>
-          <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p>
+          <h1>¡Hola Parker!</h1><br/>
+          <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p><br/>
           <p>Tú decides con quien contactar. Sin costes ni compromiso. 🙂</p>
         </div>
         <div className={styles.container_columns_right_parent}>
@@ -148,25 +151,45 @@ const Parker = () => {
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Durante qué periodo de alquiler?</h2>
+              <select className={styles.formulario} value={periodo} onChange={(e) => setPeriodo(e.target.value)}>
+                <option value="Indefinido">Indefinido</option>
+                <option value="< de un mes"> Menos de un mes </option>
+                <option value="1-6 Meses">1-6 Meses</option>
+                <option value="6-12 Meses">6-12 Meses</option>
+                <option value="Más de un año">Más de un año</option>
+              </select>
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Para qué vehiculo es adecuada?</h2>
-              <label>Tamaño:</label>
-              <select value={tamano} onChange={(e) => setTamaño(e.target.value)}>
+              <select className={styles.formulario} value={tamano} onChange={(e) => setTamaño(e.target.value)}>
                 <option value="Pequeño (3,6 x 1,6m)">Moto</option>
                 <option value="Pequeño (3,6 x 1,6m)">Pequeño (3,6 x 1,6m)</option>
                 <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 x 1,8m)</option>
                 <option value="Grande (5 x 1,9m)">Grande (5 x 1,9m)</option>
               </select>
+              <div>
+              <input className={styles.formulario_checkbox} type="checkbox"/> Carga para vehículo electrico
+              </div>
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿En qué planta se situa?</h2>
+              <select className={styles.formulario} value={planta} onChange={(e) => setPlanta(e.target.value)}>
+              <option value="Planta Baja">Planta baja</option>
+              <option value="-1">-1</option>
+              <option value="-2">-2</option>
+              <option value="-3">-3</option>
+            </select>
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Tienes plaza en propiedad o es alquilada?</h2>
+              <select className={styles.formulario} value={propiedad} onChange={(e) => setPropiedad(e.target.value)}>
+              <option value="Propiedad">Propiedad</option>
+              <option value="Alquilada">Alquilada</option>
+              </select>
             </div>
             <div className={styles.container_columns_right}>
-              <h2 className={styles.title_h2}>¿Por cuando la alquilas al mes?</h2>
+              <h2 className={styles.title_h2}>¿Por cuánto la alquilas?</h2>
+              <input className={styles.formulario_importe} type='number' min="1" max="200"></input> €/mes
             </div>
             <div>
             <button type="submit">Enviar</button>

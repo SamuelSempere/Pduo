@@ -32,15 +32,16 @@
 {
   display: flex;
   flex-direction: row;
-  padding: 10% 3%;
+  padding: 6% 3%;
   gap: 45px;
 }
 .container_columns_left{
- width: 20%
+ width: 22%;
+ line-height: 22px;
 }
 .container_columns_right_parent{
     color: black;
-    width: 75%;
+    width: 76%;
     
 }
 .container_columns_right{
@@ -61,7 +62,8 @@
   border: 2px solid #d1d1d1;
   transition: all .3s;
   line-height: 1.5;
-  font-size: 1.1em
+  font-size: 1.1em;
+  margin-bottom: 15px;
 }
 .formulario_checkbox{
   width:25px;
@@ -82,6 +84,17 @@
   transition: all .3s;
   line-height: 1.5;
   font-size: 1.1em
+}
+.formulario_importe{
+  width: 90px;
+  height: 40px;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border: 2px solid #d1d1d1;
+  transition: all .3s;
+  line-height: 1.5;
+  font-size: 1.1em;
+  margin-bottom: 15px;
 }
 
 .suggestions {
@@ -182,7 +195,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.3);
 }
 .title_h2 {
-  padding: 35px 0;
+  padding: 25px 0;
   color: #68e4dc;
 }
 
