@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-      <Image fill src='/park1.jpg'></Image>
+      <Image alt='imagen fondo' fill src='/park1.jpg'></Image>
       </div>
     </main>
   )

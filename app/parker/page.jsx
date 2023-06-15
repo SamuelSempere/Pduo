@@ -120,7 +120,7 @@ const Parker = () => {
                 <ul className={styles.suggestions_list}>
                   {data.map(({ place_id, description }) => (
                     <div className={styles.suggestions} key={place_id} onClick={() => handleSelect(description)}>
-                      <Image className={styles.park_image} width={15} height={21} src='/parking-ico.png' />{description}
+                      <Image alt="fondo parking" className={styles.park_image} width={15} height={21} src='/parking-ico.png' />{description}
                     </div>
                   ))}
                 </ul>
