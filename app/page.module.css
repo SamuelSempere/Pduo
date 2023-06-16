@@ -53,6 +53,13 @@
   display: flex;
     align-items: center;
 }
+.div_center{
+  display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-left: 2px;
+}
 
 .formulario{
   width: 100%;

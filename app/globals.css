@@ -17,5 +17,10 @@ button[type="submit"] {
     font-weight: 300;
     text-transform: uppercase;
 }
-
+input[type=checkbox]{
+  cursor: pointer;
+}
+input[type=checkbox]:checked{
+  accent-color: #ffffff;
+}
 }

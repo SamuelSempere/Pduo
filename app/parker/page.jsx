@@ -13,22 +13,44 @@ import Image from 'next/image'
 const Parker = () => {
   const [address, setAddress] = useState('');
   const [showMap, setShowMap] = useState(false);
+  const [entreSemana, setEntreSemana] = useState(false);
+  const [entreSemanaHorarioDesde, setEntreSemanaHorarioDesde] = useState();
+  const [entreSemanaHorarioHasta, setEntreSemanaHorarioHasta] = useState();
+  const [entreSemana24, setEntreSemana24] = useState(false);
+  const [finSemanaHorarioDesde, setFinSemanaHorarioDesde] = useState();
+  const [finSemanaHorarioHasta, setFinSemanaHorarioHasta] = useState();
+  const [finSemana, setFinSemana] = useState(false);
+  const [finSemana24, setFinSemana24] = useState(false);
   const [tamano, setTamaño] = useState('Pequeño (3,6 x 1,6m)');
+  const [cargaElectrica, setCargaElectrica] = useState(false);
   const [periodo, setPeriodo] = useState('Indefinido');
   const [planta, setPlanta] = useState('Planta baja');  
   const [propiedad, setPropiedad] = useState('Propiedad');
   const [latitud, setLatitud] = useState('');
   const [longitud, setLongitud] = useState('');
+  const [valor, setValor] = useState('0');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
-      vehiculo,
       tamano,
       direccion: address,
       latitud,
-      longitud
+      longitud,
+      entreSemana,
+      entreSemanaHorarioDesde,
+      entreSemanaHorarioHasta,
+      entreSemana24,
+      finSemana,
+      finSemanaHorarioDesde,
+      finSemanaHorarioHasta,
+      finSemana24,
+      cargaElectrica,
+      periodo,
+      planta,
+      propiedad,
+      valor
     };
     console.log(data)
     try {
@@ -59,7 +81,7 @@ const Parker = () => {
         country: 'es',
       }
     },
-    debounce: 500,
+    debounce: 800,
     googleMapsApiKey: token,
     scriptOptions: {
       onload: () => handleScriptLoad(),
@@ -109,7 +131,7 @@ const Parker = () => {
           <form onSubmit={handleSubmit}>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Dónde se ubica tu plaza?</h2>
-              <p>Indica el nº para ser más precisos en la búqueda</p>
+              <div className={styles.div_center}><p>Indica el nº para ser más precisos en la búqueda</p></div>
               <input
                 value={value}
                 onChange={handleInput}
@@ -136,16 +158,16 @@ const Parker = () => {
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿En qué horario la ofreces?</h2>
               <div className={styles.formulario_horario}>
-                  <input className={styles.formulario_checkbox} type="checkbox"/> Entre semana
-                  <input className={styles.formulario_date} type="time" step="3600000" /> a 
-                  <input className={styles.formulario_date} type="time" step="3600000" />
-                  <input className={styles.formulario_checkbox} type="checkbox"/> 24 Horas     
+                  <input className={styles.formulario_checkbox} value={entreSemana} type="checkbox" onClick={() => setEntreSemana(!entreSemana)}/> Entre semana
+                  <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioDesde(e.target.value)} type="time"/> a 
+                  <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioHasta(e.target.value)} type="time"/>
+                  <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setEntreSemana24(!entreSemana24)}/> 24 Horas     
               </div>
               <div className={styles.formulario_horario}>
-              <input className={styles.formulario_checkbox} type="checkbox"/> Fin de semana
-              <input className={styles.formulario_date} type="time" step="3600000" /> a 
-              <input className={styles.formulario_date} type="time" step="3600000" />
-              <input className={styles.formulario_checkbox} type="checkbox"/> 24 Horas     
+              <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana(!finSemana)}/> Fin de semana
+              <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioDesde(e.target.value)} type="time"/> a 
+              <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioHasta(e.target.value)} type="time"/>
+              <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana24(!finSemana24)}/> 24 Horas     
           </div>
               <div></div>
             </div>
@@ -162,13 +184,13 @@ const Parker = () => {
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Para qué vehiculo es adecuada?</h2>
               <select className={styles.formulario} value={tamano} onChange={(e) => setTamaño(e.target.value)}>
-                <option value="Pequeño (3,6 x 1,6m)">Moto</option>
                 <option value="Pequeño (3,6 x 1,6m)">Pequeño (3,6 x 1,6m)</option>
                 <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 x 1,8m)</option>
                 <option value="Grande (5 x 1,9m)">Grande (5 x 1,9m)</option>
+                <option value="Pequeño (3,6 x 1,6m)">Moto</option>
               </select>
-              <div>
-              <input className={styles.formulario_checkbox} type="checkbox"/> Carga para vehículo electrico
+              <div className={styles.div_center}>
+              <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setCargaElectrica(!cargaElectrica)}/> Carga para vehículo electrico
               </div>
             </div>
             <div className={styles.container_columns_right}>
@@ -189,7 +211,7 @@ const Parker = () => {
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Por cuánto la alquilas?</h2>
-              <input className={styles.formulario_importe} type='number' min="1" max="200"></input> €/mes
+              <input className={styles.formulario_importe} value={valor} type='number' min="1" max="200" onChange={(e) => setValor(e.target.value)}></input> €/mes
             </div>
             <div>
             <button type="submit">Enviar</button>

@@ -105,8 +105,9 @@ export default function RootLayout({ children }) {
       <body>
         <header className={styles.header}>
         <div className={styles.logo}>
-        <Image src='/logo-parkiduo.png'
-        fill={true}
+        <Image priority src='/logo-parkiduo.png'
+        width={300}
+        height={84}
         alt='logo'>
         </Image>
         </div>
@@ -114,7 +115,10 @@ export default function RootLayout({ children }) {
           isOpen={isOpen}
           onOpen={handleIsOpen}
           onClose={handleIsOpen}
-          styles={styles_menu} itemListElement="div" right pageWrapId={"page-wrap"}>
+          styles={styles_menu} 
+          itemListElement="div" 
+          right 
+          pageWrapId={"page-wrap"}>
             <nav>
               {links.map(({ label, route }) => (
                 <div className={styles.bmItem_div} key={route}><Link onClick={closeSideBar} href={route}>{label}</Link></div>
