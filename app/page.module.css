@@ -60,6 +60,14 @@
     margin-top: 5px;
     margin-left: 2px;
 }
+.loginButton{
+  position: fixed;
+  right: 100px;
+  top: 28px;
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+}
 
 .formulario{
   width: 100%;
