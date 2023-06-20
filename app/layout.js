@@ -8,6 +8,7 @@ import { slide as Menu } from 'react-burger-menu'
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import Login from './components/login'
 
+
 const links = [
   {
     label: 'Inicio',
@@ -98,7 +99,6 @@ export default function RootLayout({ children }) {
 
 
   return (
-    <UserProvider>
     <html lang="es">
       <head><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCziTRCAS24xZAsN9cjqhI4w_oUE8velIw&libraries=places&callback=Function.prototype" defer></script>
       </head>
@@ -130,10 +130,12 @@ export default function RootLayout({ children }) {
           </Menu>
         </header>
         <div className="page-wrap" id="page-wrap">
-          {children}
+            <UserProvider>
+                  {children}
+            </UserProvider>
         </div>
       </body>
     </html>
-    </UserProvider>
+    
   )
 }
