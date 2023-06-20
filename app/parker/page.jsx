@@ -8,6 +8,7 @@ import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocom
 import Map from '../components/map';
 import Image from 'next/image'
 
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 
 const Parker = () => {
@@ -88,7 +89,8 @@ const Parker = () => {
     },
   });
 
-
+  const { user, error, isLoading } = useUser();
+ 
   const handleScriptLoad = () => {
     setShowMap(true);
   };
@@ -118,12 +120,11 @@ const Parker = () => {
   };
 
 
-
   return (
     <div className={styles.container}>
       <div className={styles.container_columns}>
         <div className={styles.container_columns_left}>
-          <h1>¡Hola Parker!</h1><br/>
+          <h1>¡Hola {user ? user.given_name : "Parker"}! </h1><br/>
           <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p><br/>
           <p>Tú decides con quien contactar. Sin costes ni compromiso. 🙂</p>
         </div>
