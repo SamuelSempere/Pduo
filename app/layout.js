@@ -19,8 +19,7 @@ export default function RootLayout({ children }) {
         <header className={styles.header}>
         <div className={styles.logo}>
         <Image priority src='/logo-parkiduo.png'
-        width={300}
-        height={84}
+         fill
         alt='logo'>
         </Image>
         </div>

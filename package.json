@@ -11,10 +11,12 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.0.0-beta.2",
     "@googlemaps/js-api-loader": "^1.15.2",
+    "@nextui-org/react": "^1.0.0-beta.13",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "next": "13.4.1",
     "react": "18.2.0",
+    "react-avatar": "^5.0.3",
     "react-burger-menu": "^3.0.9",
     "react-dom": "18.2.0",
     "use-places-autocomplete": "^4.0.0"

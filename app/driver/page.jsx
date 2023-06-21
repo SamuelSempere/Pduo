@@ -1,5 +1,6 @@
 'use client'
 import Map from '../components/map';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 /*
 const fetchGarages  = () =>  {
@@ -41,4 +42,4 @@ const Page = () => {
     </div>
   );
 };
-export default Page;
+export default withPageAuthRequired(Page);

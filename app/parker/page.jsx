@@ -7,7 +7,7 @@ import styles from './../page.module.css'
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import Map from '../components/map';
 import Image from 'next/image'
-
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 
@@ -223,4 +223,4 @@ const Parker = () => {
   );
 };
 
-export default Parker;
+export default withPageAuthRequired(Parker);
