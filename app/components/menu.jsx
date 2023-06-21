@@ -78,7 +78,7 @@ export default function BurgerMenu() {
           route: '/myaccount'
         },
         {
-          label: 'Conacto',
+          label: 'Contacto',
           route: '/contacto'
         },
       ]
