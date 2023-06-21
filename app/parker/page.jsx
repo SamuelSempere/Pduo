@@ -90,7 +90,6 @@ const Parker = () => {
   });
 
   const { user, error, isLoading } = useUser();
- 
   const handleScriptLoad = () => {
     setShowMap(true);
   };
