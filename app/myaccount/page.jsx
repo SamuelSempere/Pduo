@@ -16,6 +16,7 @@ console.log(user)
             <img src={user.picture} alt={user.name} />
             <h2>{user.name}</h2>
             <p>{user.email}</p>
+            <button onClick={() => router.push('/api/auth/logout')}></button>
           </div>
       )
   );
