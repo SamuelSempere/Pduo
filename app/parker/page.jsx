@@ -9,6 +9,7 @@ import Map from '../components/map';
 import Image from 'next/image'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import date from 'date-and-time';
 
 
 const Parker = () => {
@@ -34,18 +35,35 @@ const Parker = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+ 
+    function formatearFecha(fecha) {
+      var partes = fecha.split(':');
+      var hora = partes[0];
+      var minutos = partes[1];
+      
+      var fechaCompleta = new Date();
+      fechaCompleta.setHours(hora);
+      fechaCompleta.setMinutes(minutos);
+      
+      var segundos = fechaCompleta.getSeconds();
+      var milisegundos = fechaCompleta.getMilliseconds();
+      
+      return hora + ':' + minutos + ':' + segundos + '.' + milisegundos;
+    }
+
+
     const data = {
       tamano,
       direccion: address,
       latitud,
       longitud,
       entreSemana,
-      entreSemanaHorarioDesde,
-      entreSemanaHorarioHasta,
+      //entreSemanaHorarioDesde,
+      entreSemanaHorarioHasta : formatearFecha(entreSemanaHorarioHasta),
       entreSemana24,
       finSemana,
-      finSemanaHorarioDesde,
-      finSemanaHorarioHasta,
+      //finSemanaHorarioDesde,
+      //finSemanaHorarioHasta,
       finSemana24,
       cargaElectrica,
       periodo,
@@ -165,8 +183,8 @@ const Parker = () => {
               </div>
               <div className={styles.formulario_horario}>
               <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana(!finSemana)}/> Fin de semana
-              <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioDesde(e.target.value)} type="time"/> a 
-              <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioHasta(e.target.value)} type="time"/>
+              <input className={styles.formulario_date} step="1" onChange={(e) => setFinSemanaHorarioDesde(e.target.value)} type="time"/> a 
+              <input className={styles.formulario_date} step="1" onChange={(e) => setFinSemanaHorarioHasta(e.target.value)} type="time"/>
               <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana24(!finSemana24)}/> 24 Horas     
           </div>
               <div></div>
@@ -175,9 +193,9 @@ const Parker = () => {
               <h2 className={styles.title_h2}>¿Durante qué periodo de alquiler?</h2>
               <select className={styles.formulario} value={periodo} onChange={(e) => setPeriodo(e.target.value)}>
                 <option value="Indefinido">Indefinido</option>
-                <option value="< de un mes"> Menos de un mes </option>
-                <option value="1-6 Meses">1-6 Meses</option>
-                <option value="6-12 Meses">6-12 Meses</option>
+                <option value="Menos de un mes">Menos de un mes</option>
+                <option value="Entre 1-6 Meses">Entre 1-6 Meses</option>
+                <option value="Entre 6-12 Meses">Entre 6-12 Meses</option>
                 <option value="Más de un año">Más de un año</option>
               </select>
             </div>
@@ -187,7 +205,7 @@ const Parker = () => {
                 <option value="Pequeño (3,6 x 1,6m)">Pequeño (3,6 x 1,6m)</option>
                 <option value="Mediano (4,5 x 1,8m)">Mediano (4,5 x 1,8m)</option>
                 <option value="Grande (5 x 1,9m)">Grande (5 x 1,9m)</option>
-                <option value="Pequeño (3,6 x 1,6m)">Moto</option>
+                <option value="Moto">Moto</option>
               </select>
               <div className={styles.div_center}>
               <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setCargaElectrica(!cargaElectrica)}/> Carga para vehículo electrico
@@ -197,9 +215,9 @@ const Parker = () => {
               <h2 className={styles.title_h2}>¿En qué planta se situa?</h2>
               <select className={styles.formulario} value={planta} onChange={(e) => setPlanta(e.target.value)}>
               <option value="Planta Baja">Planta baja</option>
-              <option value="-1">-1</option>
-              <option value="-2">-2</option>
-              <option value="-3">-3</option>
+              <option value="Planta -1">Planta -1</option>
+              <option value="Planta -2">Planta -2</option>
+              <option value="Planta -3">Planta -3</option>
             </select>
             </div>
             <div className={styles.container_columns_right}>

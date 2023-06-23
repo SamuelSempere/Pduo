@@ -12,6 +12,7 @@
     "@auth0/nextjs-auth0": "^3.0.0-beta.2",
     "@googlemaps/js-api-loader": "^1.15.2",
     "@nextui-org/react": "^1.0.0-beta.13",
+    "date-and-time": "^3.0.2",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "next": "13.4.1",
