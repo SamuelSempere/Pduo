@@ -25,24 +25,23 @@ function Garajes() {
     useEffect(() => {
         const getGarajes = async () => {
             const garajesData = await fetchGarajes();
-            console.log(garajesData.data);
-            setGarajes(garajesData.data); // Actualiza el estado con los datos de los garajes
+            setGarajes(garajesData.data);
+            console.log(garajes); // Actualiza el estado con los datos de los garajes
         };
         getGarajes();
     }, []);
+
 
     return (
         <div>
             <h1>Lista de Garajes</h1>
             <ul>
-            {garajes.data.map(garage => (
+            {garajes.map(garage => (
                 <div key={garage.id}>
-                    <p>{garage.id}</p>
-                    <p>{garage.attributes.vehiculo}</p>
-                    <p>{garage.attributes.tamano}</p>
-                    <p>{garage.attributes.direccion}</p>
-                    </div>
-                ))}
+                <p>{garage.id}</p>
+                <p>{garage.attributes.direccion}</p>
+                </div>
+            ))}
             </ul>
         </div>
     );
