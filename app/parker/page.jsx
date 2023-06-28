@@ -9,8 +9,6 @@ import Map from '../components/map';
 import Image from 'next/image'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { useUser } from '@auth0/nextjs-auth0/client';
-import date from 'date-and-time';
-
 
 const Parker = () => {
   const [address, setAddress] = useState('');
@@ -35,22 +33,20 @@ const Parker = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
- 
-    function formatearFecha(fecha) {
-      var partes = fecha.split(':');
-      var hora = partes[0];
-      var minutos = partes[1];
-      
-      var fechaCompleta = new Date();
-      fechaCompleta.setHours(hora);
-      fechaCompleta.setMinutes(minutos);
-      
-      var segundos = fechaCompleta.getSeconds();
-      var milisegundos = fechaCompleta.getMilliseconds();
-      
-      return hora + ':' + minutos + ':' + segundos + '.' + milisegundos;
-    }
+    console.log(entreSemanaHorarioDesde.split(':')[1])
 
+const formatDate = (date) =>{
+const hora = date.split(':')[0]
+const minutos = date.split(':')[1]
+
+var d1 = new Date()
+d1.toLocaleString("es-ES", {timeZone: "Europe/Madrid"})
+d1.setHours(hora)
+d1.setMinutes(minutos)
+d1.setSeconds('00')
+d1.setMilliseconds('000')
+return d1;
+} 
 
     const data = {
       tamano,
@@ -58,12 +54,12 @@ const Parker = () => {
       latitud,
       longitud,
       entreSemana,
-      //entreSemanaHorarioDesde,
-      entreSemanaHorarioHasta : formatearFecha(entreSemanaHorarioHasta),
+      entreSemanaHorarioDesde: formatDate(entreSemanaHorarioDesde),
+      entreSemanaHorarioHasta: formatDate(entreSemanaHorarioHasta),
       entreSemana24,
       finSemana,
-      //finSemanaHorarioDesde,
-      //finSemanaHorarioHasta,
+      finSemanaHorarioDesde:  formatDate(finSemanaHorarioDesde),
+      finSemanaHorarioHasta:  formatDate(finSemanaHorarioHasta),
       finSemana24,
       cargaElectrica,
       periodo,
@@ -137,6 +133,9 @@ const Parker = () => {
   };
 
 
+
+
+
   return (
     <div className={styles.container}>
       <div className={styles.container_columns}>
@@ -183,8 +182,8 @@ const Parker = () => {
               </div>
               <div className={styles.formulario_horario}>
               <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana(!finSemana)}/> Fin de semana
-              <input className={styles.formulario_date} step="1" onChange={(e) => setFinSemanaHorarioDesde(e.target.value)} type="time"/> a 
-              <input className={styles.formulario_date} step="1" onChange={(e) => setFinSemanaHorarioHasta(e.target.value)} type="time"/>
+              <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioDesde(e.target.value)} type="time"/> a 
+              <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioHasta(e.target.value)} type="time"/>
               <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana24(!finSemana24)}/> 24 Horas     
           </div>
               <div></div>

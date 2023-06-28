@@ -39,7 +39,8 @@ function Garajes() {
             {garajes.map(garage => (
                 <div key={garage.id}>
                 <p>{garage.id}</p>
-                <p>{garage.attributes.direccion}</p>
+                <p>{garage.attributes.entreSemanaHorarioDesde}</p>
+                <p>{garage.attributes.finSemanaHorarioDesde}</p>
                 </div>
             ))}
             </ul>
