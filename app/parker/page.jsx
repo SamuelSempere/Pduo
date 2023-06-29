@@ -9,6 +9,7 @@ import Map from '../components/map';
 import Image from 'next/image'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import { Modal, Button, Text } from "@nextui-org/react";
 
 const Parker = () => {
   const [address, setAddress] = useState('');
@@ -32,6 +33,14 @@ const Parker = () => {
 
   const [entreSemanaDisabled, setentreSemanaDisabled] = useState(true);
   const [finSemanaDisabled, setfinSemanaDisabled] = useState(true);
+
+  const [visible, setVisible] = useState(false);
+  const handler = () => setVisible(true);
+
+  const closeHandler = () => {
+    setVisible(false);
+    console.log("closed");
+  };
 
 
   const handleSubmit = async (e) => {
@@ -89,7 +98,10 @@ const Parker = () => {
       });
 
       const responseData = await response.json();
-      console.log(responseData); // Realiza alguna acción con la respuesta de la API
+      if (response?.ok) {
+      handler()
+      console.log(responseData);
+      } // Realiza alguna acción con la respuesta de la API
     } catch (error) {
       console.error(error);
     }
@@ -157,6 +169,36 @@ const finSemanaHabilitar = () =>{
     <div className={styles.container}>
       <div className={styles.container_columns}>
         <div className={styles.container_columns_left}>
+       
+      <Modal
+        closeButton
+        aria-labelledby="modal-title"
+        open={visible}
+        onClose={closeHandler}
+      >
+        <Modal.Header>
+          <Text id="modal-title" size={18}>
+            Parki
+            <Text b size={18}>
+              duo
+            </Text>
+          </Text>
+        </Modal.Header>
+        <Modal.Body>
+        <Text b cener size={18}>
+        duo
+      </Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button auto flat color="error" onPress={closeHandler}>
+            Cerrar
+          </Button>
+          <Button auto onPress={closeHandler}>
+            Sign in
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
           <h1>¡Hola {user ? user.given_name : "Parker"}! </h1><br />
           <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p><br />
           <p>Tú decides con quien contactar. Sin costes ni compromiso. 🙂</p>
