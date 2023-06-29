@@ -52,6 +52,9 @@
 .formulario_horario{
   display: flex;
     align-items: center;
+    justify-content: space-around;
+    gap: 5px;
+    margin-bottom: 3px;
 }
 .div_center{
   display: flex;

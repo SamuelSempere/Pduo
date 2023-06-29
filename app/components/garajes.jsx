@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 const token = process.env.NEXT_PUBLIC_API_STRAPI;
 
-console.log("hace fetch")
-
 const options = {
     cache: 'no-store',
     headers: {
@@ -25,8 +23,7 @@ function Garajes() {
     useEffect(() => {
         const getGarajes = async () => {
             const garajesData = await fetchGarajes();
-            setGarajes(garajesData.data);
-            console.log(garajes); // Actualiza el estado con los datos de los garajes
+            setGarajes(garajesData.data);// Actualiza el estado con los datos de los garajes
         };
         getGarajes();
     }, []);
@@ -38,9 +35,10 @@ function Garajes() {
             <ul>
             {garajes.map(garage => (
                 <div key={garage.id}>
-                <p>{garage.id}</p>
+                <p>{garage.attributes.direccion}</p>
                 <p>{garage.attributes.entreSemanaHorarioDesde}</p>
                 <p>{garage.attributes.finSemanaHorarioDesde}</p>
+                <br/>
                 </div>
             ))}
             </ul>

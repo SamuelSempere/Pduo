@@ -24,29 +24,39 @@ const Parker = () => {
   const [tamano, setTamaño] = useState('Pequeño (3,6 x 1,6m)');
   const [cargaElectrica, setCargaElectrica] = useState(false);
   const [periodo, setPeriodo] = useState('Indefinido');
-  const [planta, setPlanta] = useState('Planta baja');  
+  const [planta, setPlanta] = useState('Planta baja');
   const [propiedad, setPropiedad] = useState('Propiedad');
   const [latitud, setLatitud] = useState('');
   const [longitud, setLongitud] = useState('');
   const [valor, setValor] = useState('0');
 
+  const [entreSemanaDisabled, setentreSemanaDisabled] = useState(true);
+  const [finSemanaDisabled, setfinSemanaDisabled] = useState(true);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(entreSemanaHorarioDesde.split(':')[1])
-
-const formatDate = (date) =>{
-const hora = date.split(':')[0]
-const minutos = date.split(':')[1]
-
-var d1 = new Date()
-d1.toLocaleString("es-ES", {timeZone: "Europe/Madrid"})
-d1.setHours(hora)
-d1.setMinutes(minutos)
-d1.setSeconds('00')
-d1.setMilliseconds('000')
-return d1;
-} 
+    const formatDate = (date) => {
+      var d1 = new Date()
+      if (date) {
+        const hora = date.split(':')[0]
+        const minutos = date.split(':')[1]
+        d1.toLocaleString("es-ES", { timeZone: "Europe/Madrid" })
+        d1.setHours(hora)
+        d1.setMinutes(minutos)
+        d1.setSeconds('00')
+        d1.setMilliseconds('000')
+        return d1;
+      }
+      else {
+        d1.toLocaleString("es-ES", { timeZone: "Europe/Madrid" })
+        d1.setHours('00')
+        d1.setMinutes('00')
+        d1.setSeconds('00')
+        d1.setMilliseconds('000')
+        return d1;
+      }
+    }
 
     const data = {
       tamano,
@@ -58,8 +68,8 @@ return d1;
       entreSemanaHorarioHasta: formatDate(entreSemanaHorarioHasta),
       entreSemana24,
       finSemana,
-      finSemanaHorarioDesde:  formatDate(finSemanaHorarioDesde),
-      finSemanaHorarioHasta:  formatDate(finSemanaHorarioHasta),
+      finSemanaHorarioDesde: formatDate(finSemanaHorarioDesde),
+      finSemanaHorarioHasta: formatDate(finSemanaHorarioHasta),
       finSemana24,
       cargaElectrica,
       periodo,
@@ -133,22 +143,29 @@ return d1;
   };
 
 
-
+const entreSemanaHabilitar = () =>{
+  setEntreSemana(!entreSemana)
+  setentreSemanaDisabled(!entreSemanaDisabled)
+}
+const finSemanaHabilitar = () =>{
+  setFinSemana(!finSemana)
+  setfinSemanaDisabled(!finSemanaDisabled)
+}
 
 
   return (
     <div className={styles.container}>
       <div className={styles.container_columns}>
         <div className={styles.container_columns_left}>
-          <h1>¡Hola {user ? user.given_name : "Parker"}! </h1><br/>
-          <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p><br/>
+          <h1>¡Hola {user ? user.given_name : "Parker"}! </h1><br />
+          <p>Indícanos los datos de tu plaza y te enviaremos aquellos conductores compatibles e interesados en ella.</p><br />
           <p>Tú decides con quien contactar. Sin costes ni compromiso. 🙂</p>
         </div>
         <div className={styles.container_columns_right_parent}>
           <form onSubmit={handleSubmit}>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Dónde se ubica tu plaza?</h2>
-              <div className={styles.div_center}><p>Indica el nº para ser más precisos en la búqueda</p></div>
+             <div className={styles.div_center}><p>Indica el nº para ser más precisos en la búqueda</p></div>
               <input
                 value={value}
                 onChange={handleInput}
@@ -174,19 +191,20 @@ return d1;
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿En qué horario la ofreces?</h2>
+              <div>
               <div className={styles.formulario_horario}>
-                  <input className={styles.formulario_checkbox} value={entreSemana} type="checkbox" onClick={() => setEntreSemana(!entreSemana)}/> Entre semana
-                  <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioDesde(e.target.value)} type="time"/> a 
-                  <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioHasta(e.target.value)} type="time"/>
-                  <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setEntreSemana24(!entreSemana24)}/> 24 Horas     
+                <input className={styles.formulario_checkbox} value={entreSemana} type="checkbox" onClick={entreSemanaHabilitar} /> Entre semana&nbsp;
+                <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioDesde(e.target.value)} disabled={entreSemanaDisabled} type="time" /> a
+                <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioHasta(e.target.value)} disabled={entreSemanaDisabled} type="time" />
+                 {/*<input className={styles.formulario_checkbox} type="checkbox" onClick={() => setEntreSemana24(!entreSemana24)} disabled={entreSemanaDisabled} /> 24 Horas */}
               </div>
               <div className={styles.formulario_horario}>
-              <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana(!finSemana)}/> Fin de semana
-              <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioDesde(e.target.value)} type="time"/> a 
-              <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioHasta(e.target.value)} type="time"/>
-              <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana24(!finSemana24)}/> 24 Horas     
-          </div>
-              <div></div>
+                <input className={styles.formulario_checkbox} type="checkbox" onClick={finSemanaHabilitar}/> Fin de semana
+                <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioDesde(e.target.value)} disabled={finSemanaDisabled} type="time" /> a
+                <input className={styles.formulario_date} step="60" onChange={(e) => setFinSemanaHorarioHasta(e.target.value)}  disabled={finSemanaDisabled} type="time" />
+                {/*<input className={styles.formulario_checkbox} type="checkbox" onClick={() => setFinSemana24(!finSemana24)} disabled={finSemanaDisabled} /> 24 Horas  */}
+              </div>
+              </div>
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Durante qué periodo de alquiler?</h2>
@@ -207,23 +225,23 @@ return d1;
                 <option value="Moto">Moto</option>
               </select>
               <div className={styles.div_center}>
-              <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setCargaElectrica(!cargaElectrica)}/> Carga para vehículo electrico
+                <input className={styles.formulario_checkbox} type="checkbox" onClick={() => setCargaElectrica(!cargaElectrica)} /> Carga para vehículo electrico
               </div>
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿En qué planta se situa?</h2>
               <select className={styles.formulario} value={planta} onChange={(e) => setPlanta(e.target.value)}>
-              <option value="Planta Baja">Planta baja</option>
-              <option value="Planta -1">Planta -1</option>
-              <option value="Planta -2">Planta -2</option>
-              <option value="Planta -3">Planta -3</option>
-            </select>
+                <option value="Planta Baja">Planta baja</option>
+                <option value="Planta -1">Planta -1</option>
+                <option value="Planta -2">Planta -2</option>
+                <option value="Planta -3">Planta -3</option>
+              </select>
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿Tienes plaza en propiedad o es alquilada?</h2>
               <select className={styles.formulario} value={propiedad} onChange={(e) => setPropiedad(e.target.value)}>
-              <option value="Propiedad">Propiedad</option>
-              <option value="Alquilada">Alquilada</option>
+                <option value="Propiedad">Propiedad</option>
+                <option value="Alquilada">Alquilada</option>
               </select>
             </div>
             <div className={styles.container_columns_right}>
@@ -231,11 +249,11 @@ return d1;
               <input className={styles.formulario_importe} value={valor} type='number' min="1" max="200" onChange={(e) => setValor(e.target.value)}></input> €/mes
             </div>
             <div>
-            <button type="submit">Enviar</button>
+              <button type="submit">Enviar</button>
             </div>
-            </form>
+          </form>
         </div>
-    </div>
+      </div>
     </div>
   );
 };
