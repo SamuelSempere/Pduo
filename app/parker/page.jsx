@@ -10,6 +10,7 @@ import Image from 'next/image'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Modal, Button, Text } from "@nextui-org/react";
+import { redirect } from 'next/navigation'
 
 const Parker = () => {
   const [address, setAddress] = useState('');
@@ -39,6 +40,7 @@ const Parker = () => {
 
   const closeHandler = () => {
     setVisible(false);
+    redirect('/driver')
     console.log("closed");
   };
 
@@ -182,19 +184,20 @@ const finSemanaHabilitar = () =>{
             <Text b size={18}>
               duo
             </Text>
+
           </Text>
         </Modal.Header>
         <Modal.Body>
-        <Text b cener size={18}>
-        duo
-      </Text>
+        <Text b size={38}>
+        GRACIAS
+        </Text>
+        <Text size={18}>
+        Tu garaje ya está disponible , pronto recibirás avisos por email de los interesados....
+        </Text>
         </Modal.Body>
-        <Modal.Footer>
-          <Button auto flat color="error" onPress={closeHandler}>
+        <Modal.Footer center>
+          <Button flat space-around color="primary" onPress={closeHandler}>
             Cerrar
-          </Button>
-          <Button auto onPress={closeHandler}>
-            Sign in
           </Button>
         </Modal.Footer>
       </Modal>
@@ -233,11 +236,11 @@ const finSemanaHabilitar = () =>{
             </div>
             <div className={styles.container_columns_right}>
               <h2 className={styles.title_h2}>¿En qué horario la ofreces?</h2>
-              <div>
+              <div style={{'maxWidth': '500px'}}>
               <div className={styles.formulario_horario}>
                 <input className={styles.formulario_checkbox} value={entreSemana} type="checkbox" onClick={entreSemanaHabilitar} /> Entre semana&nbsp;
-                <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioDesde(e.target.value)} disabled={entreSemanaDisabled} type="time" /> a
-                <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioHasta(e.target.value)} disabled={entreSemanaDisabled} type="time" />
+                <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioDesde(e.target.value)} required={entreSemanaDisabled} disabled={entreSemanaDisabled} type="time" /> a
+                <input className={styles.formulario_date} step="60" onChange={(e) => setEntreSemanaHorarioHasta(e.target.value)} required={entreSemanaDisabled} disabled={entreSemanaDisabled} type="time" />
                  {/*<input className={styles.formulario_checkbox} type="checkbox" onClick={() => setEntreSemana24(!entreSemana24)} disabled={entreSemanaDisabled} /> 24 Horas */}
               </div>
               <div className={styles.formulario_horario}>
